@@ -4,19 +4,28 @@ declare(strict_types=1);
 
 namespace Marktic\BillingPlans;
 
-use Bytic\PackageBase\BaseServiceProvider;
+use Bytic\PackageBase\BaseBootableServiceProvider;
+use Marktic\BillingPlans\Utility\PackageConfig;
 
-class BillingPlansServiceProvider extends BaseServiceProvider
+/**
+ * Class BillingPlansServiceProvider
+ * @package Marktic\BillingPlans
+ */
+class BillingPlansServiceProvider extends BaseBootableServiceProvider
 {
     public const NAME = 'mkt_billing_plans';
 
-    protected $packageName = 'billing-plans';
-
-    protected $packageNamespace = 'BillingPlans';
-
-    public function boot(): void
+    public function migrations(): ?string
     {
-        parent::boot();
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        if (PackageConfig::shouldRunMigrations()) {
+            return dirname(__DIR__) . '/database/migrations/';
+        }
+
+        return null;
+    }
+
+    protected function translationsPath(): ?string
+    {
+        return dirname(__DIR__) . '/resources/lang';
     }
 }
