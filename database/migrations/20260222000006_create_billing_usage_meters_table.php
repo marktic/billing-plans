@@ -8,7 +8,7 @@ final class CreateBillingUsageMetersTable extends AbstractMigration
 {
     public function change(): void
     {
-        $table_name = 'billing_usage_meters';
+        $table_name = 'mkt_billing_usage_meters';
         if ($this->hasTable($table_name)) {
             return;
         }
@@ -26,9 +26,9 @@ final class CreateBillingUsageMetersTable extends AbstractMigration
             ->addIndex(['feature_id'])
             ->addIndex(['billable_type', 'billable_id', 'feature_id', 'period_start'], [
                 'unique' => true,
-                'name' => 'billing_usage_meters_billable_feature_period_unique',
+                'name' => 'mkt_billing_usage_meters_billable_feature_period_unique',
             ])
-            ->addForeignKey('feature_id', 'billing_features', 'id', [
+            ->addForeignKey('feature_id', 'mkt_billing_features', 'id', [
                 'delete' => 'CASCADE',
                 'update' => 'NO_ACTION',
             ])

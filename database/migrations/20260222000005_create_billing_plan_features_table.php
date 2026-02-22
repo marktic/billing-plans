@@ -8,7 +8,7 @@ final class CreateBillingPlanFeaturesTable extends AbstractMigration
 {
     public function change(): void
     {
-        $table_name = 'billing_plan_features';
+        $table_name = 'mkt_billing_plan_features';
         if ($this->hasTable($table_name)) {
             return;
         }
@@ -18,23 +18,23 @@ final class CreateBillingPlanFeaturesTable extends AbstractMigration
             ->addColumn('plan_id', 'biginteger', ['signed' => false])
             ->addColumn('feature_id', 'biginteger', ['signed' => false])
             ->addColumn('included_amount', 'decimal', ['precision' => 12, 'scale' => 4, 'null' => true])
-            ->addColumn('price_per_unit', 'decimal', ['precision' => 12, 'scale' => 4, 'null' => true])
+            ->addColumn('price_per_unit', 'integer', ['signed' => true, 'null' => true])
             ->addColumn('postpaid', 'boolean', ['default' => false])
             ->addColumn('reset_period', 'string', ['limit' => 20, 'null' => true])
             ->addColumn('reset_interval', 'integer', ['signed' => false, 'default' => 1])
-            ->addColumn('max_overage', 'decimal', ['precision' => 12, 'scale' => 4, 'null' => true])
+            ->addColumn('max_overage', 'integer', ['signed' => true, 'null' => true])
             ->addTimestamps()
             ->addIndex(['plan_id'])
             ->addIndex(['feature_id'])
             ->addIndex(['plan_id', 'feature_id'], [
                 'unique' => true,
-                'name' => 'billing_plan_features_plan_feature_unique',
+                'name' => 'mkt_billing_plan_features_plan_feature_unique',
             ])
-            ->addForeignKey('plan_id', 'billing_plans', 'id', [
+            ->addForeignKey('plan_id', 'mkt_billing_plans', 'id', [
                 'delete' => 'CASCADE',
                 'update' => 'NO_ACTION',
             ])
-            ->addForeignKey('feature_id', 'billing_features', 'id', [
+            ->addForeignKey('feature_id', 'mkt_billing_features', 'id', [
                 'delete' => 'CASCADE',
                 'update' => 'NO_ACTION',
             ])

@@ -8,19 +8,22 @@ final class CreateBillingFeatureCategoriesTable extends AbstractMigration
 {
     public function change(): void
     {
-        $table_name = 'billing_feature_categories';
+        $table_name = 'mkt_billing_feature_categories';
         if ($this->hasTable($table_name)) {
             return;
         }
 
         $this->table($table_name, ['id' => false, 'primary_key' => 'id'])
             ->addColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->addColumn('tenant_type', 'string', ['limit' => 100])
+            ->addColumn('tenant_id', 'biginteger', ['signed' => false])
             ->addColumn('slug', 'string', ['limit' => 100])
             ->addColumn('name', 'string', ['limit' => 255])
             ->addColumn('description', 'text', ['null' => true])
             ->addColumn('order', 'smallinteger', ['signed' => false, 'default' => 0])
             ->addTimestamps()
-            ->addIndex(['slug'], ['unique' => true, 'name' => 'billing_feature_categories_slug_unique'])
+            ->addIndex(['tenant_type', 'tenant_id'])
+            ->addIndex(['tenant_type', 'tenant_id', 'slug'], ['unique' => true, 'name' => 'mkt_billing_feature_categories_tenant_slug_unique'])
             ->create();
     }
 }

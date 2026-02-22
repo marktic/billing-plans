@@ -8,7 +8,7 @@ final class CreateBillingUsageEventsTable extends AbstractMigration
 {
     public function change(): void
     {
-        $table_name = 'billing_usage_events';
+        $table_name = 'mkt_billing_usage_events';
         if ($this->hasTable($table_name)) {
             return;
         }
@@ -29,7 +29,7 @@ final class CreateBillingUsageEventsTable extends AbstractMigration
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addIndex(['billable_type', 'billable_id', 'feature_id'])
             ->addIndex(['reference_type', 'reference_id'])
-            ->addForeignKey('feature_id', 'billing_features', 'id', [
+            ->addForeignKey('feature_id', 'mkt_billing_features', 'id', [
                 'delete' => 'CASCADE',
                 'update' => 'NO_ACTION',
             ])

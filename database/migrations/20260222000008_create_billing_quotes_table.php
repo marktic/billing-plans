@@ -8,7 +8,7 @@ final class CreateBillingQuotesTable extends AbstractMigration
 {
     public function change(): void
     {
-        $table_name = 'billing_quotes';
+        $table_name = 'mkt_billing_quotes';
         if ($this->hasTable($table_name)) {
             return;
         }
@@ -21,11 +21,11 @@ final class CreateBillingQuotesTable extends AbstractMigration
             ->addColumn('currency', 'char', ['limit' => 3])
             ->addColumn('period_start', 'date')
             ->addColumn('period_end', 'date')
-            ->addColumn('subtotal', 'decimal', ['precision' => 12, 'scale' => 4, 'default' => '0.0000'])
-            ->addColumn('discount_amount', 'decimal', ['precision' => 12, 'scale' => 4, 'default' => '0.0000'])
+            ->addColumn('subtotal', 'integer', ['signed' => true, 'default' => 0])
+            ->addColumn('discount_amount', 'integer', ['signed' => true, 'default' => 0])
             ->addColumn('tax_rate', 'decimal', ['precision' => 6, 'scale' => 4, 'default' => '0.0000'])
-            ->addColumn('tax_amount', 'decimal', ['precision' => 12, 'scale' => 4, 'default' => '0.0000'])
-            ->addColumn('total', 'decimal', ['precision' => 12, 'scale' => 4, 'default' => '0.0000'])
+            ->addColumn('tax_amount', 'integer', ['signed' => true, 'default' => 0])
+            ->addColumn('total', 'integer', ['signed' => true, 'default' => 0])
             ->addColumn('meta', 'json', ['null' => true])
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addIndex(['billable_type', 'billable_id'])

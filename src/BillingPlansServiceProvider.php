@@ -8,6 +8,8 @@ use Bytic\PackageBase\BaseServiceProvider;
 
 class BillingPlansServiceProvider extends BaseServiceProvider
 {
+    public const NAME = 'mkt_billing_plans';
+
     protected $packageName = 'billing-plans';
 
     protected $packageNamespace = 'BillingPlans';
