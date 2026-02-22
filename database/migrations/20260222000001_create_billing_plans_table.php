@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+use Phinx\Migration\AbstractMigration;
+
+final class CreateBillingPlansTable extends AbstractMigration
+{
+    public function change(): void
+    {
+        $table_name = 'mkt_billing_plans';
+        if ($this->hasTable($table_name)) {
+            return;
+        }
+
+        $this->table($table_name, ['id' => false, 'primary_key' => 'id'])
+            ->addColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->addColumn('tenant_type', 'string', ['limit' => 100])
+            ->addColumn('tenant_id', 'biginteger', ['signed' => false])
+            ->addColumn('slug', 'string', ['limit' => 100])
+            ->addColumn('name', 'string', ['limit' => 255])
+            ->addColumn('description', 'text', ['null' => true])
+            ->addColumn('status', 'string', ['limit' => 20, 'default' => 'public'])
+            ->addTimestamps()
+            ->addIndex(['tenant_type', 'tenant_id'])
+            ->addIndex(['tenant_type', 'tenant_id', 'slug'], ['unique' => true, 'name' => 'mkt_billing_plans_tenant_slug_unique'])
+            ->addIndex(['status'])
+            ->create();
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "marktic/billing-plans",
+  "type": "library",
+  "license": "MIT",
+  "description": "Add plan and feature with usage tracking for your SAAS application",
+  "keywords": ["billing", "plans", "features", "saas", "usage", "metered"],
+  "homepage": "https://github.com/marktic/billing-plans",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Marktic\\BillingPlans\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Marktic\\BillingPlans\\Tests\\": "tests/src",
+      "Marktic\\BillingPlans\\Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "require": {
+    "php": ">=8.2",
+    "ext-json": "*",
+    "bytic/package-base": "^1.0",
+    "bytic/migrations": "~0.13",
+    "bytic/orm": "^0.9|^1.0|^2.0",
+    "bytic/orm-filters": "^0.9|^1.0|^2.0",
+    "bytic/orm-behaviors": "^0.9|^1.0|^2.0",
+    "bytic/models-smart-properties": "^1.0|^2.0"
+  },
+  "require-dev": {
+    "bytic/phpqatools": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "bytic/phpqatools": true
+    }
+  }
+}
