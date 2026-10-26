@@ -1,0 +1,28 @@
+<?php
+
+namespace Marktic\BillingPlans\Utility;
+
+use Nip\View\View;
+
+/**
+ * Class ViewHelper.
+ */
+class ViewHelper
+{
+    public const NAMESPACE = 'MktBillingPlans';
+
+    /**
+     * @param View $view
+     */
+    public static function registerAdminPaths(View $view): void
+    {
+        $view->addPath(PathsHelpers::viewsAdmin(), self::NAMESPACE);
+        $view->addPath(PathsHelpers::viewsAdmin());
+    }
+
+    public static function registerFrontendPaths(View $view): void
+    {
+        $view->addPath(PathsHelpers::viewsFrontend(), self::NAMESPACE);
+        $view->addPath(PathsHelpers::viewsFrontend());
+    }
+}
